@@ -8,9 +8,10 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 
 
-    <form method="POST">
-        Firstname: <input type="text" name="FirstName"/> <br />
-        Lastname: <input type="text" name="LastName"/> <br />
+    <form method="POST" enctype="multipart/form-data">
+        Firstname: <input type="text" name="firstName"/> <br />
+        Lastname: <input type="text" name="lastName"/> <br />
+        Profile Image: <input type="file" name="file"/>
         <input type="submit" />
     </form>
 

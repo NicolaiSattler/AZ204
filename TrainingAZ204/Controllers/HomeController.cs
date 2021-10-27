@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using TrainingAZ204.Core;
 using TrainingAZ204.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace TrainingAZ204.Controllers
 {
@@ -23,11 +24,11 @@ namespace TrainingAZ204.Controllers
         private readonly ILogger<HomeController> _logger;
         private CloudQueue _queue;
         private CloudTable _table;
+        private CloudBlobContainer _blob;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-
         }
 
         private async Task InitializeAsync()
@@ -36,13 +37,16 @@ namespace TrainingAZ204.Controllers
             var account = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=trainingnicolaistorage;AccountKey=j9yf9yBgZs5qf0QgIE1M+ZTQU7IAXXT+4w9fyQms8xoT1vnsI8r41aakLy9EkK7DxMk7uLMSZvpMCchAaMJyng==;EndpointSuffix=core.windows.net");
             var queueClient = account.CreateCloudQueueClient();
             var tableClient = account.CreateCloudTableClient();
+            var blobClient = account.CreateCloudBlobClient();
             //queuename must be lowercase 
             _queue = queueClient.GetQueueReference("personqueue");
             //tablename must be lowercase
             _table = tableClient.GetTableReference("persontable");
+            _blob = blobClient.GetContainerReference("peronblob");
 
             await _queue.CreateIfNotExistsAsync();
             await _table.CreateIfNotExistsAsync();
+            await _blob.CreateIfNotExistsAsync();
         }
         private async Task<HomeViewModel> InitializeViewModelAsync()
         {
@@ -57,18 +61,29 @@ namespace TrainingAZ204.Controllers
                 PersonCollection = result.Results
             };
         }
+        private async Task<string> CreateImageBlobAsync(IFormFile file)
+        {
+            var blockBlob = _blob.GetBlockBlobReference(file.FileName);
+
+            await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
+
+            return blockBlob.Uri.ToString();
+        }
 
         [HttpPost]
-        //public async Task<IActionResult> Index(string FirstName, string LastName, IFormFile file)
-        public async Task<IActionResult> Index(string FirstName, string LastName)
+        public async Task<IActionResult> Index(string firstName, string lastName, IFormFile file)
         {
-            var person = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{FirstName};{LastName}"));
-            var message = new CloudQueueMessage(person);
-
             if (_queue == null)
             {
                 await InitializeAsync();
             }
+
+            if (file != null)
+                await CreateImageBlobAsync(file);
+
+            var person = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{firstName};{lastName};{file?.FileName}"));
+            var message = new CloudQueueMessage(person);
+
             await _queue.AddMessageAsync(message);
 
             return RedirectToAction("Index");
