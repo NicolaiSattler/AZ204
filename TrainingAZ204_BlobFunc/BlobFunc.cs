@@ -14,7 +14,6 @@ namespace TrainingAZ204_BlobFunc
         private const int Dimension = 50;
 
         [FunctionName("ProcessImage")]
-
         public static async Task Run([BlobTrigger("personblob/{name}", Connection = "ConnectionString")]Stream myBlob, string name, ILogger log)
         {
             var connectionString = Environment.GetEnvironmentVariable("ConnectionString");

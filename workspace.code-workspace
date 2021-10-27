@@ -1,0 +1,61 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude":{
+			"**/.git": true,
+			"**/.vs": true,
+			"**/bin": true,
+			"**/obj": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			"**/Thumbs.db": true
+		}
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "build website",
+				"command": "dotnet",
+				"type": "process",
+				"args": [
+					"build",
+					"${workspaceFolder}/TrainingAZ204/TrainingAZ204.csproj",
+					"/property:GenerateFullPaths=true",
+					"/consoleloggerparameters:NoSummary"
+				]
+			}
+		]
+	},
+	"launch":{
+		"configurations": [
+			{
+				"name": "Launch Website",
+				"type": "coreclr",
+				"request": "launch",
+				"preLaunchTask": "build website",
+				"program":"${workspaceFolder}/TrainingAZ204/bin/Debug/netcoreapp3.1/TrainingAZ204.dll",
+				"args": ["--urls", "https://localhost:5001;http://localhost:5000"],
+				"cwd":"${workspaceFolder}",
+				"stopAtEntry": false,
+				"serverReadyAction":{
+					"action": "openExternally",
+					"pattern": "^\\s*Now listening on:\\s(https?//\\S+)"
+				},
+				"env": {
+					"ASPNETCORE_ENVIRONMENT": "Development"
+				},
+				"sourceFileMap": {
+					"/Views": "${workspaceFolder}/Views"
+				}
+			}
+		],
+		"compounds": []
+	}
+}

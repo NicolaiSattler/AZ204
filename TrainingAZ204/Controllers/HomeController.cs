@@ -1,40 +1,39 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Queue;
 using Microsoft.WindowsAzure.Storage.Table;
-using Newtonsoft.Json;
 using System;
-using System.Web;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrainingAZ204.Core;
 using TrainingAZ204.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.Extensions.Configuration;
 
 namespace TrainingAZ204.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _configuration;
         private CloudQueue _queue;
         private CloudTable _table;
         private CloudBlobContainer _blob;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            _configuration = configuration;
         }
 
         private async Task InitializeAsync()
         {
             //make sure to make a storage account under the same resource group
-            var account = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=trainingnicolaistorage;AccountKey=j9yf9yBgZs5qf0QgIE1M+ZTQU7IAXXT+4w9fyQms8xoT1vnsI8r41aakLy9EkK7DxMk7uLMSZvpMCchAaMJyng==;EndpointSuffix=core.windows.net");
+            var connectionString = _configuration.GetConnectionString("AzureStorageAccount");
+            var account = CloudStorageAccount.Parse(connectionString);
             var queueClient = account.CreateCloudQueueClient();
             var tableClient = account.CreateCloudTableClient();
             var blobClient = account.CreateCloudBlobClient();

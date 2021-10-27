@@ -1,6 +1,0 @@
-C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204_Worker\obj\Release\netcoreapp3.1\PubTmp\Out\app_data\Jobs\Triggered\TrainingAZ204_Worker\Settings.job
-C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204_Worker\obj\Release\netcoreapp3.1\PubTmp\Out\app_data\Jobs\Triggered\TrainingAZ204_Worker\TrainingAZ204_Worker.exe
-C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204_Worker\obj\Release\netcoreapp3.1\PubTmp\Out\app_data\Jobs\Triggered\TrainingAZ204_Worker\TrainingAZ204_Worker.dll
-C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204_Worker\obj\Release\netcoreapp3.1\PubTmp\Out\app_data\Jobs\Triggered\TrainingAZ204_Worker\TrainingAZ204_Worker.deps.json
-C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204_Worker\obj\Release\netcoreapp3.1\PubTmp\Out\app_data\Jobs\Triggered\TrainingAZ204_Worker\TrainingAZ204_Worker.runtimeconfig.json
-C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204_Worker\obj\Release\netcoreapp3.1\PubTmp\Out\app_data\Jobs\Triggered\TrainingAZ204_Worker\TrainingAZ204_Worker.pdb
