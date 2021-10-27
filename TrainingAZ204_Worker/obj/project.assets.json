@@ -5181,19 +5181,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Nicolai\\.nuget\\packages\\": {}
+    "C:\\Users\\NicolaiS\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nicolai\\Documents\\source\\TrainingAZ204-2\\TrainingAZ204_Worker\\TrainingAZ204_Worker.csproj",
+      "projectUniqueName": "C:\\Users\\NicolaiS\\source\\private repos\\AZ204\\TrainingAZ204_Worker\\TrainingAZ204_Worker.csproj",
       "projectName": "TrainingAZ204_Worker",
-      "projectPath": "C:\\Users\\Nicolai\\Documents\\source\\TrainingAZ204-2\\TrainingAZ204_Worker\\TrainingAZ204_Worker.csproj",
-      "packagesPath": "C:\\Users\\Nicolai\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nicolai\\Documents\\source\\TrainingAZ204-2\\TrainingAZ204_Worker\\obj\\",
+      "projectPath": "C:\\Users\\NicolaiS\\source\\private repos\\AZ204\\TrainingAZ204_Worker\\TrainingAZ204_Worker.csproj",
+      "packagesPath": "C:\\Users\\NicolaiS\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\NicolaiS\\source\\private repos\\AZ204\\TrainingAZ204_Worker\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Nicolai\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\NicolaiS\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5201,14 +5205,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://tfs.bkr.local/BKR_Development/_packaging/BKR_NuGet%40Local/nuget/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Nicolai\\Documents\\source\\TrainingAZ204-2\\TrainingAZ204.Core\\TrainingAZ204.Core.csproj": {
-              "projectPath": "C:\\Users\\Nicolai\\Documents\\source\\TrainingAZ204-2\\TrainingAZ204.Core\\TrainingAZ204.Core.csproj"
+            "C:\\Users\\NicolaiS\\source\\private repos\\AZ204\\TrainingAZ204.Core\\TrainingAZ204.Core.csproj": {
+              "projectPath": "C:\\Users\\NicolaiS\\source\\private repos\\AZ204\\TrainingAZ204.Core\\TrainingAZ204.Core.csproj"
             }
           }
         }
