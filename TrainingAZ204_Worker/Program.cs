@@ -45,9 +45,10 @@ namespace TrainingAZ204_Worker
             await Table.CreateIfNotExistsAsync();
             await Blob.CreateIfNotExistsAsync();
         }
-        private static async Task<string> CreateThumpNailImageAsync(string imageName)
+        private static async Task CreateThumpNailImageAsync(string imageName)
         {
-            var blockBlob = Blob.GetBlockBlobReference(imageName);
+            var blockBlob = Blob.GetBlockBlobReference($"{imageName}_TH");
+
             using(var largImageStream = new MemoryStream())
             using(var thumpNailStream = new MemoryStream())
             {
@@ -57,12 +58,14 @@ namespace TrainingAZ204_Worker
 
                 using(var image = Image.Load(largImageStream))
                 {
-                    
+                    image.Mutate(x => x.Resize(HEIGHT, WIDTH));
+                    await image.SaveAsJpegAsync(thumpNailStream);
+
+                    thumpNailStream.Position = 0;
+
+                    await blockBlob.UploadFromStreamAsync(thumpNailStream);
                 }
-
-
             }
-
         }
 
         private static async Task ExecuteAsync()
@@ -75,8 +78,12 @@ namespace TrainingAZ204_Worker
                 var items = Encoding.UTF8.GetString(bytes).Split(';');
                 var firstName = items[0];
                 var lastName = items[1];
-                var imageUrl = items[2];
-                var person = new Person { FirstName = firstName, LastName = lastName, ImageGuid = imageUrl };
+                var imageGuid = items[2];
+
+                if (new Guid(imageGuid) != Guid.Empty)
+                    await CreateThumpNailImageAsync(imageGuid);
+
+                var person = new Person { FirstName = firstName, LastName = lastName, ImageGuid = imageGuid };
                 person.PartitionKey = person.LastName[0].ToString();
                 person.RowKey = Guid.NewGuid().ToString();
 
