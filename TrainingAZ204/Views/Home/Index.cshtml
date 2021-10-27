@@ -1,0 +1,34 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+
+    <form method="POST">
+        Firstname: <input type="text" name="FirstName"/> <br />
+        Lastname: <input type="text" name="LastName"/> <br />
+        <input type="submit" />
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model.PersonCollection)
+            {
+                <tr>
+                    <td> @item.FirstName </td>
+                    <td> @item.LastName </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,1 @@
+dotnet TrainingAZ204_Worker.dll %*

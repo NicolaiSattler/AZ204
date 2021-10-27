@@ -1,0 +1,10 @@
+C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204.Core\bin\Release\netcoreapp3.1\TrainingAZ204.Core.deps.json
+C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204.Core\bin\Release\netcoreapp3.1\TrainingAZ204.Core.dll
+C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204.Core\bin\Release\netcoreapp3.1\TrainingAZ204.Core.pdb
+C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204.Core\obj\Release\netcoreapp3.1\TrainingAZ204.Core.csproj.AssemblyReference.cache
+C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204.Core\obj\Release\netcoreapp3.1\TrainingAZ204.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204.Core\obj\Release\netcoreapp3.1\TrainingAZ204.Core.AssemblyInfoInputs.cache
+C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204.Core\obj\Release\netcoreapp3.1\TrainingAZ204.Core.AssemblyInfo.cs
+C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204.Core\obj\Release\netcoreapp3.1\TrainingAZ204.Core.csproj.CoreCompileInputs.cache
+C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204.Core\obj\Release\netcoreapp3.1\TrainingAZ204.Core.dll
+C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204.Core\obj\Release\netcoreapp3.1\TrainingAZ204.Core.pdb
