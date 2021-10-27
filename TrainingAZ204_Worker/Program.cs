@@ -3,6 +3,7 @@ using Microsoft.WindowsAzure.Storage.Queue;
 using Microsoft.WindowsAzure.Storage.Table;
 using Newtonsoft.Json;
 using System;
+using System.Text;
 using System.Threading.Tasks;
 using TrainingAZ204.Core;
 
@@ -40,7 +41,11 @@ namespace TrainingAZ204_Worker
 
             if (message != null && !string.IsNullOrEmpty(message.AsString))
             {
-                var person = JsonConvert.DeserializeObject<Person>(message.AsString);
+                var bytes = Convert.FromBase64String(message.AsString);
+                var items = Encoding.UTF8.GetString(bytes).Split(';');
+                var firstName = items[0];
+                var lastName = items[1];
+                var person = new Person(firstName, lastName);
                 person.PartitionKey = person.LastName[0].ToString();
                 person.RowKey = Guid.NewGuid().ToString();
 

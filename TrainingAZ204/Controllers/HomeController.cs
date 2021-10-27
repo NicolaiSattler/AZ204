@@ -6,12 +6,15 @@ using Microsoft.WindowsAzure.Storage.Queue;
 using Microsoft.WindowsAzure.Storage.Table;
 using Newtonsoft.Json;
 using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using TrainingAZ204.Core;
 using TrainingAZ204.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace TrainingAZ204.Controllers
 {
@@ -56,12 +59,11 @@ namespace TrainingAZ204.Controllers
         }
 
         [HttpPost]
+        //public async Task<IActionResult> Index(string FirstName, string LastName, IFormFile file)
         public async Task<IActionResult> Index(string FirstName, string LastName)
         {
-            var person = new Person(FirstName, LastName);
-            var json = JsonConvert.SerializeObject(person);
-            
-            var message = new CloudQueueMessage(json);
+            var person = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{FirstName};{LastName}"));
+            var message = new CloudQueueMessage(person);
 
             if (_queue == null)
             {
