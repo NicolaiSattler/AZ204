@@ -17,3 +17,10 @@ C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204_Worker\bin\De
 C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204_Worker\bin\Debug\netcoreapp3.1\Microsoft.WindowsAzure.Storage.dll
 C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204_Worker\bin\Debug\netcoreapp3.1\TrainingAZ204.Core.dll
 C:\Users\NicolaiS\source\private repos\TrainingAZ204\TrainingAZ204_Worker\bin\Debug\netcoreapp3.1\TrainingAZ204.Core.pdb
+C:\Users\NicolaiS\source\private repos\AZ204\TrainingAZ204_Worker\obj\Debug\netcoreapp3.1\TrainingAZ204_Worker.csproj.AssemblyReference.cache
+C:\Users\NicolaiS\source\private repos\AZ204\TrainingAZ204_Worker\obj\Debug\netcoreapp3.1\TrainingAZ204_Worker.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\NicolaiS\source\private repos\AZ204\TrainingAZ204_Worker\obj\Debug\netcoreapp3.1\TrainingAZ204_Worker.AssemblyInfoInputs.cache
+C:\Users\NicolaiS\source\private repos\AZ204\TrainingAZ204_Worker\obj\Debug\netcoreapp3.1\TrainingAZ204_Worker.AssemblyInfo.cs
+C:\Users\NicolaiS\source\private repos\AZ204\TrainingAZ204_Worker\obj\Debug\netcoreapp3.1\TrainingAZ204_Worker.csproj.CoreCompileInputs.cache
+C:\Users\NicolaiS\source\private repos\AZ204\TrainingAZ204_Worker\obj\Debug\netcoreapp3.1\TrainingAZ204_Worker.dll
+C:\Users\NicolaiS\source\private repos\AZ204\TrainingAZ204_Worker\obj\Debug\netcoreapp3.1\TrainingAZ204_Worker.pdb

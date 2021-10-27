@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ni15S/f1YP1IIkkXn8f+khL0ZIxZCI+PgUKUHR2zYFf8D3T3vA8OhyWNPdAv/B2zyZ0/r/yyybi/cbTdqel8Ew==",
+  "dgSpecHash": "Bz4iISUiLzga3/g4lAVTU6AMoRUE9AjsZWU15B25QvsWj44wxHJlNZ2Odu2+OZ2oCbIlVrB5kM+Fd98WuH4mqQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\NicolaiS\\source\\private repos\\AZ204\\TrainingAZ204_Worker\\TrainingAZ204_Worker.csproj",
   "expectedPackageFiles": [
@@ -26,6 +26,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\NicolaiS\\.nuget\\packages\\sixlabors.imagesharp\\1.0.4\\sixlabors.imagesharp.1.0.4.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.buffers\\4.3.0\\system.buffers.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

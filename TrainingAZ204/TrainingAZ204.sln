@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingAZ204.Core", "..\Tr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingAZ204_Worker", "..\TrainingAZ204_Worker\TrainingAZ204_Worker.csproj", "{626088C7-64FC-47FB-92C2-934763CB991A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingAZ204_TableFunc", "..\TrainingAZ204_QueueFunc\TrainingAZ204_TableFunc.csproj", "{56CD095A-A678-4038-893A-904AC85E3FA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingAZ204_BlobFunc", "..\TrainingAZ204_BlobFunc\TrainingAZ204_BlobFunc.csproj", "{84BEDC64-4943-4B60-AC55-0A45359FA765}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{626088C7-64FC-47FB-92C2-934763CB991A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{626088C7-64FC-47FB-92C2-934763CB991A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{626088C7-64FC-47FB-92C2-934763CB991A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56CD095A-A678-4038-893A-904AC85E3FA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56CD095A-A678-4038-893A-904AC85E3FA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56CD095A-A678-4038-893A-904AC85E3FA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56CD095A-A678-4038-893A-904AC85E3FA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84BEDC64-4943-4B60-AC55-0A45359FA765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84BEDC64-4943-4B60-AC55-0A45359FA765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84BEDC64-4943-4B60-AC55-0A45359FA765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84BEDC64-4943-4B60-AC55-0A45359FA765}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

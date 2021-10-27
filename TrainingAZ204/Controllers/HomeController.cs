@@ -42,7 +42,7 @@ namespace TrainingAZ204.Controllers
             _queue = queueClient.GetQueueReference("personqueue");
             //tablename must be lowercase
             _table = tableClient.GetTableReference("persontable");
-            _blob = blobClient.GetContainerReference("peronblob");
+            _blob = blobClient.GetContainerReference("personblob");
 
             await _queue.CreateIfNotExistsAsync();
             await _table.CreateIfNotExistsAsync();
@@ -61,9 +61,9 @@ namespace TrainingAZ204.Controllers
                 PersonCollection = result.Results
             };
         }
-        private async Task<string> CreateImageBlobAsync(IFormFile file)
+        private async Task<string> CreateImageBlobAsync(IFormFile file, Guid imageId)
         {
-            var blockBlob = _blob.GetBlockBlobReference(file.FileName);
+            var blockBlob = _blob.GetBlockBlobReference(imageId.ToString());
 
             await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
 
@@ -78,10 +78,16 @@ namespace TrainingAZ204.Controllers
                 await InitializeAsync();
             }
 
-            if (file != null)
-                await CreateImageBlobAsync(file);
+            var imageId = Guid.Empty;
 
-            var person = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{firstName};{lastName};{file?.FileName}"));
+            if (file != null)
+            {
+                imageId = Guid.NewGuid();
+
+                await CreateImageBlobAsync(file, imageId);
+            }
+
+            var person = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{firstName};{lastName};{imageId}"));
             var message = new CloudQueueMessage(person);
 
             await _queue.AddMessageAsync(message);
