@@ -9,9 +9,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingAZ204.Core", "..\Tr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingAZ204_Worker", "..\TrainingAZ204_Worker\TrainingAZ204_Worker.csproj", "{626088C7-64FC-47FB-92C2-934763CB991A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingAZ204_TableFunc", "..\TrainingAZ204_QueueFunc\TrainingAZ204_TableFunc.csproj", "{56CD095A-A678-4038-893A-904AC85E3FA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingAZ204_TableFunc", "..\TrainingAZ204_QueueFunc\TrainingAZ204_TableFunc.csproj", "{56CD095A-A678-4038-893A-904AC85E3FA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingAZ204_BlobFunc", "..\TrainingAZ204_BlobFunc\TrainingAZ204_BlobFunc.csproj", "{84BEDC64-4943-4B60-AC55-0A45359FA765}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingAZ204_BlobFunc", "..\TrainingAZ204_BlobFunc\TrainingAZ204_BlobFunc.csproj", "{84BEDC64-4943-4B60-AC55-0A45359FA765}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingAZ204_SqlTableFunc", "..\TrainingAZ204_SqlTableFunc\TrainingAZ204_SqlTableFunc.csproj", "{505FDF64-D653-4A14-9C17-28B2CF839B22}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Azure Functions", "Azure Functions", "{3E5E701D-DB63-43EA-A9FB-9922AF4E5073}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingAZ204_NoSqlFunc", "..\TrainingAZ204_NoSqlFunc\TrainingAZ204_NoSqlFunc.csproj", "{079298C2-0C17-40C2-92BF-A910823DCCC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceBus", "ServiceBus", "{ABF0B989-CECE-49F9-88C1-95CAD2A6827C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingAZ204_ServiceBus", "..\TrainingAZ204_ServiceBus\TrainingAZ204_ServiceBus.csproj", "{3EE96612-72E9-499F-AC8C-5B2A0468CE6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +49,28 @@ Global
 		{84BEDC64-4943-4B60-AC55-0A45359FA765}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84BEDC64-4943-4B60-AC55-0A45359FA765}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84BEDC64-4943-4B60-AC55-0A45359FA765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{505FDF64-D653-4A14-9C17-28B2CF839B22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{505FDF64-D653-4A14-9C17-28B2CF839B22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{505FDF64-D653-4A14-9C17-28B2CF839B22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{505FDF64-D653-4A14-9C17-28B2CF839B22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{079298C2-0C17-40C2-92BF-A910823DCCC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{079298C2-0C17-40C2-92BF-A910823DCCC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{079298C2-0C17-40C2-92BF-A910823DCCC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{079298C2-0C17-40C2-92BF-A910823DCCC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EE96612-72E9-499F-AC8C-5B2A0468CE6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EE96612-72E9-499F-AC8C-5B2A0468CE6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EE96612-72E9-499F-AC8C-5B2A0468CE6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EE96612-72E9-499F-AC8C-5B2A0468CE6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{56CD095A-A678-4038-893A-904AC85E3FA8} = {3E5E701D-DB63-43EA-A9FB-9922AF4E5073}
+		{84BEDC64-4943-4B60-AC55-0A45359FA765} = {3E5E701D-DB63-43EA-A9FB-9922AF4E5073}
+		{505FDF64-D653-4A14-9C17-28B2CF839B22} = {3E5E701D-DB63-43EA-A9FB-9922AF4E5073}
+		{079298C2-0C17-40C2-92BF-A910823DCCC2} = {3E5E701D-DB63-43EA-A9FB-9922AF4E5073}
+		{3EE96612-72E9-499F-AC8C-5B2A0468CE6A} = {ABF0B989-CECE-49F9-88C1-95CAD2A6827C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {342EA3AC-5C4A-4BD6-885C-A0395BBE0E60}
