@@ -1,7 +1,7 @@
 ﻿using Azure.Messaging.ServiceBus;
-using Microsoft.Azure.ServiceBus.Core;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace TrainingAZ204_ServiceBus
@@ -10,8 +10,12 @@ namespace TrainingAZ204_ServiceBus
     {
         protected IConfiguration Configuration { get; set; }
 
-        private const string ArjenTopicName = "arjen";
+        private const string MessageTopic = "john";
+        private const string ReceiverTopic = "nicolai";
+        private const string Subscriptions = "sub";
         private const string ConnectionString = "Endpoint=sb://johngortersbns.servicebus.windows.net/;TransportType=AmqpWebSockets;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=ClDhfDCAdWbTRQyboJkXcSCf1orZNsvblxy6oWknrU4=;";
+
+        private static ServiceBusClient ServiceBusClient { get; set; }
 
         private static void Initialize()
         {
@@ -21,32 +25,55 @@ namespace TrainingAZ204_ServiceBus
         {
             Console.WriteLine("Hello World!");
 
-            var serviceBusClient = new ServiceBusClient(ConnectionString);
-            var sender = serviceBusClient.CreateSender(ArjenTopicName);
-
-            using ServiceBusMessageBatch messageBatch = await sender.CreateMessageBatchAsync();
-
-            for (int i = 1; i <= 3; i++)
-                if (!messageBatch.TryAddMessage(new ServiceBusMessage($"Message {i}")))
-                    throw new Exception($"The message {i} is too large to fit in the batch.");
+            ServiceBusClient = new ServiceBusClient(ConnectionString);
+            var options = new ServiceBusProcessorOptions();
+            var processor = ServiceBusClient.CreateProcessor(ReceiverTopic, MessageTopic, options);
 
             try
             {
-                await sender.SendMessagesAsync(messageBatch);
+                processor.ProcessMessageAsync += MessageHandler;
+                processor.ProcessErrorAsync += ErrorHandler;
+
+                await processor.StartProcessingAsync();
+
                 Console.WriteLine($"A batch of {3} messages has been published to the topic.");
+
+                while (1 < 2)
+                {
+
+                }
+                await processor.StopProcessingAsync();
             }
             finally
             {
-                // Calling DisposeAsync on client types is required to ensure that network
-                // resources and other unmanaged objects are properly cleaned up.
-                await sender.DisposeAsync();
-                await serviceBusClient.DisposeAsync();
+                await ServiceBusClient.DisposeAsync();
             }
         }
 
+        static async Task SendMessage(string message)
+        {
+            var sender = ServiceBusClient.CreateSender(MessageTopic);
+            using ServiceBusMessageBatch messageBatch = await sender.CreateMessageBatchAsync();
+
+            try
+            {
+                messageBatch.TryAddMessage(new ServiceBusMessage(message));
+
+                await sender.SendMessagesAsync(messageBatch);
+            }
+            finally
+            {
+                await sender.DisposeAsync();
+            }
+
+        }
         static async Task MessageHandler(ProcessMessageEventArgs args)
         {
+            var body = args.Message.Body.ToString();
+            var mutation = new string(body.Reverse().ToArray());
 
+            await SendMessage(mutation);
+            await args.CompleteMessageAsync(args.Message);
         }
         static async Task ErrorHandler(ProcessErrorEventArgs args)
         {
