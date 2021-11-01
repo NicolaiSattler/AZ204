@@ -12,59 +12,83 @@ using TrainingAZ204.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.Extensions.Configuration;
+using Azure.Messaging.EventGrid;
+using Azure;
+using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.DataContracts;
+using Azure.Storage.Queues;
+using Azure.Storage.Blobs;
+using Azure.Data.Tables;
+using Azure.Data.Tables.Models;
+using System.Collections.Generic;
 
 namespace TrainingAZ204.Controllers
 {
+    //TODO:
+    // - replace WindowsAzure.Storage with Azure.Storage.Blobs&Queue and Azure.Data.Tables
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _configuration;
-        private CloudQueue _queue;
-        private CloudTable _table;
-        private CloudBlobContainer _blob;
+        private readonly TelemetryClient _telemetry;
 
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
+        private EventGridPublisherClient _eventGridClient;
+        private QueueClient _queueClient;
+        private TableClient _tableClient;
+        private BlobContainerClient _blobClient;
+
+        private bool _useEventGrid;
+
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, TelemetryClient telemetry)
         {
             _logger = logger;
             _configuration = configuration;
+            _telemetry = telemetry;
+            //TODO: fix appsettings
+            //_telemetry.InstrumentationKey = "afdd7460-6cbf-4fa6-8d74-1331c6b08e5a";
         }
 
         private async Task InitializeAsync()
         {
-            //make sure to make a storage account under the same resource group
             var connectionString = _configuration.GetConnectionString("AzureStorageAccount");
-            var account = CloudStorageAccount.Parse(connectionString);
-            var queueClient = account.CreateCloudQueueClient();
-            var tableClient = account.CreateCloudTableClient();
-            var blobClient = account.CreateCloudBlobClient();
-            //queuename must be lowercase 
-            _queue = queueClient.GetQueueReference("personqueue");
-            //tablename must be lowercase
-            _table = tableClient.GetTableReference("persontable");
-            _blob = blobClient.GetContainerReference("personblob");
 
-            await _queue.CreateIfNotExistsAsync();
-            await _table.CreateIfNotExistsAsync();
-            await _blob.CreateIfNotExistsAsync();
+            _tableClient = new TableClient(connectionString, "persontable");
+            await _tableClient.CreateIfNotExistsAsync();
+
+            _queueClient = new QueueClient(connectionString, "personqueue");
+            await _queueClient.CreateIfNotExistsAsync();
+
+            _blobClient = new BlobContainerClient(connectionString, "personblob");
+            await _blobClient.CreateIfNotExistsAsync();
+
+            //event grid
+            _useEventGrid = _configuration.GetValue<bool>("UseEventGrid");
+
+            var urlString = _configuration.GetValue<string>("AzureEventGridUrl");
+            var key = _configuration.GetValue<string>("AzureEventGridKey");
+            var url = new Uri(urlString);
+            var credential = new AzureKeyCredential(key);
+            _eventGridClient = new EventGridPublisherClient(url, credential);
         }
+        
         private async Task<HomeViewModel> InitializeViewModelAsync()
         {
             await InitializeAsync();
 
-            var query = new TableQuery<Person>();
-            var token = new TableContinuationToken();
-            var result = await _table.ExecuteQuerySegmentedAsync(query, token);
+            var collection = new List<Person>();
+            var result = _tableClient.Query<Person>();
 
-            return new HomeViewModel
-            {
-                PersonCollection = result.Results
-            };
+            foreach (var item in result)
+                collection.Add(item);
+
+            return new HomeViewModel { PersonCollection = collection };
         }
+
         private async Task<string> CreateImageBlobAsync(IFormFile file, Guid imageId)
         {
-            var blockBlob = _blob.GetBlockBlobReference(imageId.ToString());
+            var blockBlob = _blobClient.GetBlobClient(imageId.ToString());
 
-            await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
+            await blockBlob.UploadAsync(file.OpenReadStream());
 
             return blockBlob.Uri.ToString();
         }
@@ -72,7 +96,9 @@ namespace TrainingAZ204.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(string firstName, string lastName, IFormFile file)
         {
-            if (_queue == null)
+            _telemetry.TrackEvent("NewPerson");
+
+            if (_queueClient == null)
             {
                 await InitializeAsync();
             }
@@ -86,15 +112,21 @@ namespace TrainingAZ204.Controllers
                 await CreateImageBlobAsync(file, imageId);
             }
 
-            var person = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{firstName};{lastName};{imageId}"));
-            var message = new CloudQueueMessage(person);
-
-            await _queue.AddMessageAsync(message);
+            if (_useEventGrid)
+            {
+                await _eventGridClient.SendEventAsync(new EventGridEvent("person", "person-added", "1.0.0", new { FirstName = firstName, LastName = lastName, ImageId = imageId }));
+            }
+            else
+            {
+                var person = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{firstName};{lastName};{imageId}"));
+                await _queueClient.SendMessageAsync(person);
+            }
 
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> Index(HomeViewModel vm)
         {
+            _telemetry.TrackPageView("HomePage");
             if (vm == null || vm.PersonCollection == null)
             {
                 vm = await InitializeViewModelAsync();
